@@ -1,0 +1,34 @@
+/* ul{
+  padding: 5px;
+}
+@media screen and (max-width: 600px) {
+} */
+
+/* nav{
+  color: aliceblue;
+} */
+.top-right {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  direction: rtl !important;
+
+}
+  .responsive {
+    width: 100%;
+    /* background-size:contain ; */
+    height: 450px;
+  }
+
+  /* bg-light  להוסיף אותו שיש 600 */
+
+
+
+
+  /* להמשיך את הנושא לפאלפון */
+@media only screen and (max-width: 600px) {
+  .responsive {
+    height: 414px;
+    width: 100%;
+  }
+}

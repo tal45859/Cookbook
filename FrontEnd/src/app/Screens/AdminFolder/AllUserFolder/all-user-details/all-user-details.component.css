@@ -1,0 +1,39 @@
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+  text-align: center;
+   margin-top: 50px;
+   margin-bottom: 50px;
+   min-height: 500px;
+   direction: rtl;
+}
+
+hr{
+  width: 25%;
+  margin-right: 37.5%;
+}
+
+.AddDisplay{
+  display: contents;
+  justify-content: center;
+}
+.removeDisplay
+{
+  display: none;
+}
+@media only screen and (max-width: 600px) {
+
+
+  .container {
+     border-radius: 5px;
+     background-color: #f2f2f2;
+     padding: 5px;
+     text-align: center;
+     margin-top: 50px;
+     margin-bottom: 50px;
+     min-height: 500px;
+     width: 90%;
+     direction: rtl;
+  }
+}

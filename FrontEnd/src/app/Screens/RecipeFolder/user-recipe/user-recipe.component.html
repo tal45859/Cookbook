@@ -1,0 +1,30 @@
+<div class="container" *ngIf="OpenSun==0">
+
+  <div class=" mb-3">
+    <button (click)="OpenSun=2"  class=" btn btn-primary ms-1 mb-1">הוספת מתכון</button>
+  </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    <div *ngFor="let item of RecipeArray  | paginate: { itemsPerPage: 9, currentPage: page }" class="col">
+      <div class="card h-100">
+        <img src="{{GetImageByRecipeId(item.Id)}}" class="card-img-top" alt="{{item.RecipeName}}">
+        <div class="card-body">
+          <h5 class="card-title">{{item.RecipeName}}</h5>
+          <p class="card-text">זמן הכנה: {{item.PreparationTime}} דקות</p>
+          <div class="mb-1"><button class="btn btn-primary" (click)="OpenSun=1;RecipeObjToSun=item">פרטים נוספים</button></div>
+          <div class="mb-1"><button (click)=" ObjectToUpdateRecipe=item ;OpenSun=3" class="btn btn-primary">עדכן</button></div>
+          <div class="mb-1"><button (click)="ClickDelete(item.Id)" class="btn btn-danger">מחק</button></div>
+          <small id="{{item.Id}}" class="ms-1 mb-1 removeDisplay text-danger">{{ResponseMessage.Message}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+  [nextLabel]="'הבא'"></pagination-controls>
+
+  </div>
+  <app-recipe-details *ngIf="OpenSun==1"[RecipeObj]="RecipeObjToSun" (CloseMeOutpot)="CloseMe()" ></app-recipe-details>
+  <app-add-recipe-home *ngIf="OpenSun==2"></app-add-recipe-home>
+  <app-update-recipe-home [RecipeObjectToUpdate]="ObjectToUpdateRecipe" *ngIf="OpenSun==3"></app-update-recipe-home>
+
+

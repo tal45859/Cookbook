@@ -1,0 +1,50 @@
+<div class="container">
+
+  <p class="h5 mt-3">סה"כ קטגוריות :{{this.CategoryArray.length}}</p>
+      <div class="table-responsive mt-3">
+        <table class="table table-dark table-striped table-hover">
+          <thead>
+            <tr>
+              <th>שם הקטגוריה</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let item of CategoryArray | paginate: { itemsPerPage: 10, currentPage: page }">
+            <tr>
+              <td>{{item.CategoryName}}</td>
+              <td>
+
+                <button type="button" (click)="this.CategoryObjToUpdate = item ; this.IsDeleteOUpdate=true" class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">עדכן </button>
+                <button type="button" (click)="this.IdForDelete = item.Id ; this.IsDeleteOUpdate=false" class="btn btn-danger ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">מחק </button>
+              </td>
+            </tr>
+            <tr id="{{item.Id}}" class="removeDisplay" >
+              <td colspan="8"><small class="text-danger">
+                <p>{{!this.IsDeleteOUpdate? 'לא הצלחנו למחוק את הקטגוריה אנא נסה שנית מאוחר יותר!': this.ResponseMesage.Message}}</p>
+              </small></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    <pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+    [nextLabel]="'הבא'"></pagination-controls>
+</div>
+
+ <!-- update delete -->
+ <div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="staticBackdropLabel">{{IsDeleteOUpdate? 'תהליך עדכון':'אישור מחיקה'}}</h5>
+      </div>
+      <div class="modal-body">
+          <p>{{IsDeleteOUpdate? '':'האם אתה בטוח שברצונך למחוק את הקטגוריה לצמיתות?'}}</p>
+          <input *ngIf="IsDeleteOUpdate" type="text" placeholder="שם קטגוריה" [(ngModel)]="CategoryObjToUpdate.CategoryName" >
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="this.CategoryObjToUpdate ={};IdForDelete=0 " data-bs-dismiss="modal">ביטול</button>
+        <button type="button" class="btn {{IsDeleteOUpdate? 'btn-primary': 'btn-danger' }} " (click)="IsDeleteOUpdate? UpdateCategory():ClickDeleteCategory()"  data-bs-dismiss="modal" >אישור</button>
+      </div>
+    </div>
+  </div>
+</div>

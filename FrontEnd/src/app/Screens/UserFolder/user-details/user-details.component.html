@@ -1,0 +1,61 @@
+<div class="container">
+
+  <p class="text-primary h2">פרטים אישים</p>
+  <hr class="mb-3 text-primary">
+
+  <div class="table-responsive mt-3">
+    <table class="table table-dark table-striped table-hover">
+      <thead>
+        <tr>
+          <th>שם פרטי</th>
+          <th>שם משפחה</th>
+          <th>מייל</th>
+          <th>טלפון</th>
+          <th>סיסמה מוצפנת</th>
+          <th>תאריך הרשמה</th>
+          <th>תאריך לידה</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{UserObjectInput.FirstName}}</td>
+          <td>{{UserObjectInput.LastName}}</td>
+          <td>{{UserObjectInput.Mail}}</td>
+          <td>{{UserObjectInput.Phone}}</td>
+          <td>{{UserObjectInput.Password}}</td>
+          <td>{{UserObjectInput.RegisterDate |date:'dd-MM-yyyy' }}</td>
+          <td>{{UserObjectInput.Birthdate |date:'dd-MM-yyyy'}}</td>
+          <!-- Button trigger modal -->
+          <td><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">מחק </button></td>
+        </tr>
+        <tr *ngIf="!this.RsponseMessage.Isok">
+          <td colspan="8"><small class="text-danger">{{this.RsponseMessage.Message}}</small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal -->
+<div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="staticBackdropLabel">אישור מחיקה</h5>
+      </div>
+      <div class="modal-body">
+          <p>האם אתה בטוח שברצונך למחוק את המשתמש לצמיתות?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ביטול</button>
+        <button type="button" class="btn btn-primary" (click)="ClickDelete()"  data-bs-dismiss="modal" >אישור</button>
+      </div>
+    </div>
+  </div>
+</div>
+

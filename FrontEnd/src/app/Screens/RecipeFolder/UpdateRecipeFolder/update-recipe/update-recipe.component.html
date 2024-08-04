@@ -1,0 +1,77 @@
+<div class="container ">
+
+  <div class="border border-primary p-5 mt-5 mb-5">
+    <p class="text-primary h2">עדכון מתכון</p>
+    <hr class="mb-3 text-primary">
+
+
+
+
+      <div class="mb-3">
+        <label for="validationServerRecipeName">שם מתכון</label>
+        <input class="form-control mb-1 {{this.ResponseErrorMesage[0].Isok ?'':'is-invalid'}} "  type="text" [(ngModel)]="RecipeObjectUpdate.RecipeName"
+        placeholder="שם מתכון" id="validationServerRecipeName" aria-describedby="validationServerRecipeNameFeedback" required>
+        <div id="validationServerRecipeNameFeedback" class="invalid-feedback">
+          {{this.ResponseErrorMesage[0].Message}}
+        </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationServerIngredients">מצרכים</label>
+      <input class="form-control mb-1 {{this.ResponseErrorMesage[1].Isok ?'':'is-invalid'}} "   type="text" [(ngModel)]="RecipeObjectUpdate.Ingredients"
+      placeholder="מצרכים" id="validationServerIngredients" aria-describedby="validationServerIngredientsFeedback" required>
+      <div id="validationServerIngredientsFeedback" class="invalid-feedback">
+        {{this.ResponseErrorMesage[1].Message}}
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationServerPreparationMethod">אופן הכנה</label>
+    <input class="form-control mb-1 {{this.ResponseErrorMesage[2].Isok ?'':'is-invalid'}} "   type="text" [(ngModel)]="RecipeObjectUpdate.PreparationMethod"
+    placeholder="אופן הכנה" id="validationServerPreparationMethod" aria-describedby="validationServerPreparationMethodFeedback" required>
+    <div id="validationServerPreparationMethodFeedback" class="invalid-feedback">
+      {{this.ResponseErrorMesage[2].Message}}
+    </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationServerPreparationTime">זמן הכנה</label>
+    <input class="form-control mb-1 {{this.ResponseErrorMesage[3].Isok ?'':'is-invalid'}} "   type="number" [(ngModel)]="RecipeObjectUpdate.PreparationTime"
+    placeholder="זמן הכנה" id="validationServerPreparationTime" aria-describedby="validationServerPreparationTimeFeedback" required>
+    <div id="validationServerPreparationTimeFeedback" class="invalid-feedback">
+    {{this.ResponseErrorMesage[3].Message}}
+    </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="validationServerQuantityOfPortions">כמות מנות</label>
+    <input class="form-control mb-1 {{this.ResponseErrorMesage[4].Isok ?'':'is-invalid'}} "   type="number" [(ngModel)]="RecipeObjectUpdate.QuantityOfPortions"
+    placeholder="כמות מנות" id="validationServerQuantityOfPortions" aria-describedby="validationServerQuantityOfPortionsFeedback" required>
+    <div id="validationServerQuantityOfPortionsFeedback" class="invalid-feedback">
+      {{this.ResponseErrorMesage[4].Message}}
+    </div>
+    </div>
+
+    <div class="mb-3">
+    <label for="validationServerCanBeExpected">ניתן לצפיה</label>
+    <input class="form-check-input mb-1 {{this.ResponseErrorMesage[5].Isok ?'':'is-invalid'}} "  type="checkbox" [(ngModel)]="RecipeObjectUpdate.CanBeExpected"
+    id="validationServerCanBeExpected" aria-describedby="validationServerCanBeExpectedFeedback" required>
+    <div id="validationServerCanBeExpectedFeedback" class="invalid-feedback">
+    {{this.ResponseErrorMesage[5].Message}}
+    </div>
+</div>
+
+    <div *ngIf="!this.ResponseErrorMesage[6].Isok" class="mt-3 mb-3">
+      <small class="text-danger">{{this.ResponseErrorMesage[6].Message}}</small>
+    </div>
+
+    <div *ngIf="!SpinnerOn" class="mt-2">
+      <div><button  class="btn btn-primary" (click)="SpinnerOn=true ; ClickUpdate()">עדכן פרטי מתכון</button></div>
+    </div>
+
+    <div *ngIf="SpinnerOn" class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+
+

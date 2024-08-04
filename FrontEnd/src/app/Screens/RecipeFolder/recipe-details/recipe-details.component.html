@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="float-end mb-3"><button type="button" class="btn-close" (click)="ClickClose()" aria-label="Close"></button></div>
+  <div class="">
+    <div *ngIf="ImageArray.length>0"><img src="{{ImageArray[Index].Url}}" alt=""></div>
+    <div *ngIf="ImageArray.length==0"><img src="assets/defult.png" alt=""></div>
+      <div  *ngIf="ImageArray.length>0" class="btn-group mt-2" role="group" aria-label="Basic outlined example">
+        <button type="button"  class="btn btn-outline-primary ms-1" (click)="ChangeIndex(true)">קדימה</button>
+        <button type="button" class="btn btn-outline-primary" (click)="ChangeIndex(false)">אחורה</button>
+    </div>
+    <div class="mt-2">
+      <i  class='bi bi-hand-thumbs-up btn ms-3' (click)="AddLikeOrNoLike(true)" title="אוהב">{{RecipeObj?.NumberOfLikes}}</i>
+      <i class='bi bi-hand-thumbs-down btn' (click)="AddLikeOrNoLike(false)" title="לא אוהב">{{RecipeObj?.NumberOfNoLieks}}</i>
+    </div>
+
+    <div class="text-primary mb-3 mt-2">
+      <div>
+        <h4><strong>{{RecipeObj?.RecipeName}} מצרכים:</strong></h4>
+        <hr>
+        <p>{{RecipeObj?.Ingredients}}</p>
+      </div>
+      <div class="text-primary mb-3">
+        <h4 ><strong>{{RecipeObj?.RecipeName}} אופן ההכנה:</strong></h4>
+        <p >{{RecipeObj?.PreparationMethod}}</p>
+        <hr >
+      </div>
+      <div class="row mb-3">
+        <p class="col">זמן הכנה: {{RecipeObj?.PreparationTime}} דקות</p>
+        <p class="col">כמות סועדים: {{RecipeObj?.QuantityOfPortions}}</p>
+        <p class="col">מספר צפיות : {{RecipeObj?.NumberOfViews}}</p>
+        <!-- <p class="col">{{RecipeObj.}}</p> -->
+      </div>
+
+
+    </div>
+
+
+    <div *ngIf="!this.ResponseMessage.Isok">
+      <small class="text-danger">{{this.ResponseMessage.Message}}</small>
+    </div>
+    <hr class="text-primary">
+    <app-comment-home [RecipeId]="RecipeObj?.Id"></app-comment-home>
+
+  </div>
+
+</div>

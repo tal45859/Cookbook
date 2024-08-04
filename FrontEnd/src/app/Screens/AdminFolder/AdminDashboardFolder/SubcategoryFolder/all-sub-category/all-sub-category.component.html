@@ -1,0 +1,48 @@
+<div class="container">
+
+  <p class="text-primary h4">רשימת כל הקטגוריות ותתי הקטגוריות</p>
+  <hr class="mb-3 text-primary">
+
+
+  <div class="row">
+    <ul class="list-group col-md-4 mt-3  " *ngFor="let item of this.AllCategoryArray">
+      <li class="list-group-item active" type="button" (click)="ChangePanel(item.Id)" aria-current="true">{{item.CategoryName}}</li>
+      <div class="removeDisplay" id="{{item.Id}}">
+        <div  *ngFor="let subitem of  AllSubCategoryArray">
+          <li class="list-group-item" *ngIf=" item.Id == subitem.CategoryId">{{subitem.SubcategoryName}}
+            <br>
+            <button type="button" (click)="this.IdForDelete = subitem.Id ; this.IsDeleteOrUpdate=false" class="btn btn-danger ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">מחק </button>
+            <button type="button" (click)="this.IsDeleteOrUpdate=true ; SubCategoryObjectToUpdate=subitem " class="btn btn-primary ms-1" data-bs-toggle="modal" data-bs-target="#staticBackdrop">עדכן </button>
+          </li>
+          <div class="removeDisplay" id="Error{{subitem.Id}}">
+            <small class="text-danger">{{this.ResponseMesage.Message}}</small>
+          </div>
+        </div>
+    </div>
+    </ul>
+  </div>
+</div>
+
+
+
+
+<div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="staticBackdropLabel">{{this.IsDeleteOrUpdate?'תהליך עדכון':'אישור מחיקה'}}</h5>
+      </div>
+      <div class="modal-body">
+          <p *ngIf="!IsDeleteOrUpdate">האם אתה בטוח שברצונך למחוק את הדיווח לצמיתות?</p>
+          <input *ngIf="IsDeleteOrUpdate" placeholder="שם תת קטגוריה" type="text" [(ngModel)]="SubCategoryObjectToUpdate.SubcategoryName" >
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="this.IdForDelete = 0" data-bs-dismiss="modal">ביטול</button>
+        <button (click)="IsDeleteOrUpdate?ClickUpdate():ClickDelete()" class=" {{IsDeleteOrUpdate?'btn btn-primary':'btn btn-danger'}} " data-bs-dismiss="modal" >{{IsDeleteOrUpdate?'עדכן':'מחק'}} </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- להמשיך את המחיקה להשמיש אותה -->
+<!-- להשמיש את עדכון -->

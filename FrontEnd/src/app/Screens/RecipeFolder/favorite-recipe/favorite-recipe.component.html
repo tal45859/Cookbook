@@ -1,0 +1,28 @@
+<div class="container" *ngIf="OpenSun==0">
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    <div *ngFor="let item of FavoriteArray  | paginate: { itemsPerPage: 9, currentPage: page }" class="col">
+      <div class="card h-100">
+        <img src="{{GetImageByRecipeId(item.Recipe?.Id)}}" class="card-img-top" alt="{{item.Recipe?.RecipeName}}">
+        <div class="card-body">
+          <h5 class="card-title">{{item.Recipe?.RecipeName}}</h5>
+          <p class="card-text">זמן הכנה: {{item.Recipe?.PreparationTime}} דקות</p>
+          <div class="mb-1"><button class="btn btn-primary" (click)="OpenSun=1;RecipeObjToSun=item.Recipe">פרטים נוספים</button></div>
+          <div  class="mb-1"><button class="btn btn-danger"(click)="ClickDeleteFavorite(item.Id)" >מחק</button></div>
+          <small id="{{item.Id}}" class="ms-1 mb-1 removeDisplay text-danger">לא הצלחנו למחוק את המועדף אנא נסה שנית מאוחר יותר!</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+  [nextLabel]="'הבא'"></pagination-controls>
+</div>
+
+<app-recipe-details *ngIf="OpenSun==1"[RecipeObj]="RecipeObjToSun" (CloseMeOutpot)="CloseMe()" ></app-recipe-details>
+<!--
+    public Id?:number;
+  public UserId?:number;
+  public RecipeId?:number;
+  public DateAdded?:Date;
+  public Recipe?:Recipe;
+ -->

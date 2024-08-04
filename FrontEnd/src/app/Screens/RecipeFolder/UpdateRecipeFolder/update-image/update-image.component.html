@@ -1,0 +1,28 @@
+<div class="container ">
+
+  <div class="border border-primary p-5 mt-5 mb-5">
+    <p class="text-primary h2">עדכון תמונות</p>
+    <hr class="mb-3 text-primary">
+
+    <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+      <div *ngFor="let item of AllNewImageArr " class="col">
+        <div class="card h-100">
+          <img src="{{item.Url}}" class="card-img-top" alt="{{item.Url}}">
+          <div class="card-body">
+            <div class="mb-1"><button (click)="OnclickDeleteImage(item.Id)" class="btn btn-danger">מחק</button></div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="this.CounterLengthImages<3">
+      <input type="file" #file (change)="uploadFile(file.files)" style="display:none;"
+        multiple>
+      <button type="button" class="btn btn-primary mb-3" (click)="file.click()">הוסף תמונה</button>
+
+    </div>
+    <div><button class="btn btn-primary mb-2" (click)="OnClickFinish()">סיום עדכון</button></div>
+    <div *ngIf="!this.ResponseMessage.Isok"><small  class="mb-1 text-danger">{{this.ResponseMessage.Message}}</small></div>
+
+  </div>

@@ -1,0 +1,5 @@
+<div class="container">
+<app-add-recipe *ngIf="OpenNextStep==1" (CloseMeOutpot)="NextStep($event)"></app-add-recipe>
+<app-add-image-recipe *ngIf="OpenNextStep==2" [RecipIdLast]="RecipeId"></app-add-image-recipe>
+
+</div>

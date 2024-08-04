@@ -1,0 +1,35 @@
+<div class="container">
+
+  <div class="border border-primary p-5 mt-5 mb-5">
+    <p class="text-primary h2">הוספת תגובה</p>
+    <hr class="mb-3 text-primary">
+      <div class="mb-3">
+          <input class="form-control mb-1 {{this.ResponseMessage[0].Isok ?'':'is-invalid'}} "   type="text" [(ngModel)]="CoomentObjectToAdd.Title"
+           placeholder="כותרת" id="validationServerTitle" aria-describedby="validationServerTitleFeedback" required>
+          <div id="validationServerTitleFeedback" class="invalid-feedback">
+            {{this.ResponseMessage[0].Message}}
+          </div>
+      </div>
+
+      <div class="mb-3">
+        <input class="form-control mb-1 {{this.ResponseMessage[1].Isok ?'':'is-invalid'}} "   type="text" [(ngModel)]="CoomentObjectToAdd.Body"
+         placeholder="גוף תגובה" id="validationServerBody" aria-describedby="validationServerBodyFeedback" required>
+        <div id="validationServerBodyFeedback" class="invalid-feedback">
+          {{this.ResponseMessage[1].Message}}
+        </div>
+    </div>
+
+
+      <div *ngIf="this.IsCreate" class="mt-3 mb-3">
+        <small class="text-success">התגובה הוספה בהצלחה</small>
+      </div>
+
+      <div *ngIf="!SpinnerOn" class="mt-2">
+        <div><button  class="btn btn-primary" (click)="SpinnerOn=true ; AddComment()">הוסף</button></div>
+      </div>
+
+
+        <div *ngIf="SpinnerOn" class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+</div>

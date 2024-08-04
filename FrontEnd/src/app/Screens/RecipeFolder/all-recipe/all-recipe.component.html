@@ -1,0 +1,51 @@
+<div class="container" *ngIf="OpenSun==0">
+
+  <div class="mb-3 w-25 ml-6 mrg">
+    <label for="validationServerSelect" class="form-label">מסננים</label>
+    <select class="form-select "
+    id="validationServerSelect" aria-describedby="validationServerSelectFeedback"
+    [(ngModel)]="Filter" required>
+      <option *ngFor=" let item of option " [value]="item.value">{{item.Name}}</option>
+    </select>
+
+    <div *ngIf="Filter==2" class="mt-2">
+      <label for="validationServerSelect" class="form-label ">בחר</label>
+      <select class="form-select "
+        id="validationServerSelect" aria-describedby="validationServerSelectFeedback"
+        [(ngModel)]="CategoryIdOrSubCategoryId" required>
+        <option  *ngFor=" let item of AllSubCategory " [value]="item.Id">{{item.SubcategoryName}}</option>
+      </select>
+   </div>
+
+   <div *ngIf="Filter==3" class="mt-2">
+      <label for="validationServerSelect" class="form-label ">בחר קטגוריה</label>
+      <select class="form-select "
+        id="validationServerSelect" aria-describedby="validationServerSelectFeedback"
+        [(ngModel)]="CategoryIdOrSubCategoryId" required>
+        <option  *ngFor=" let item of AllCategory " [value]="item.Id">{{item.CategoryName}}</option>
+      </select>
+    </div>
+    <div class="mb-1 mt-1"><small *ngIf="ResponseError" class="text-danger">אנא בחר!</small></div>
+
+    <button (click)="ClickStartFilter()" class="btn btn-primary mt-2 mb-1">חפש</button>
+ </div>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-3">
+    <div *ngFor="let item of AllRecipeArr  | paginate: { itemsPerPage: 9, currentPage: page }" class="col">
+      <div class="card h-100">
+        <img src="{{GetImageByRecipeId(item.Id)}}" class="card-img-top" alt="{{item.RecipeName}}">
+        <div class="card-body">
+          <h5 class="card-title">{{item.RecipeName}}</h5>
+          <p class="card-text">זמן הכנה: {{item.PreparationTime}} דקות</p>
+          <div class="mb-1"><button class="btn btn-primary" (click)="OpenSun=1;RecipeObjToSun=item">להצגת המתכון</button></div>
+          <div *ngIf="Role == 'Classic'||Role=='Admin'" class="mb-1"><button (click)="ClickAddFavorite(item.Id)" class="btn btn-primary">הוסף למועדפים</button></div>
+          <div *ngIf="Role =='Admin'" class="mb-1"><button (click)="ClickDeleteForAdmin(item.Id)" class="btn btn-danger">מחק</button></div>
+          <small id="{{item.Id}}" class="ms-1 mb-1 removeDisplay {{ResponseMessage.Isok?'text-success':'text-danger'}} ">{{ResponseMessage.Message}}</small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+  [nextLabel]="'הבא'"></pagination-controls>
+</div>
+<app-recipe-details *ngIf="OpenSun==1"[RecipeObj]="RecipeObjToSun" (CloseMeOutpot)="CloseMe()" ></app-recipe-details>

@@ -1,0 +1,72 @@
+<div class="container">
+
+
+  <div class="border border-primary p-5 mt-5 mb-5">
+    <p class="text-primary h2">עדכון פרטים אישים</p>
+    <hr class="mb-3 text-primary">
+
+  <div class="mb-3">
+    <label class="text-primary" for="validationServerFirstName">שם פרטי</label>
+    <input class="form-control mb-1 {{this.UserValidationResponse[0].Isok ?'':'is-invalid'}} "  autocomplete="cc-given-name" type="text" [(ngModel)]="UserObjectInput.FirstName"
+     placeholder="שם פרטי" id="validationServerFirstName" aria-describedby="validationServerFirstNameFeedback" required>
+    <div id="validationServerFirstNameFeedback" class="invalid-feedback">
+      {{this.UserValidationResponse[0].Message}}
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label class="text-primary" for="validationServerLastName">שם משפחה</label>
+    <input class="form-control mb-1 {{this.UserValidationResponse[1].Isok ?'':'is-invalid'}} "  autocomplete="cc-family-name" type="text" [(ngModel)]="UserObjectInput.LastName"
+     placeholder="שם משפחה" id="validationServerLastName" aria-describedby="validationServerLastNameFeedback" required>
+    <div id="validationServerLastNameFeedback" class="invalid-feedback">
+      {{this.UserValidationResponse[1].Message}}
+    </div>
+  </div>
+
+
+
+  <div class="mb-3">
+    <label class="text-primary" for="validationServerBirthdate">תאריך לידה</label>
+    <input class="form-control mb-1 {{this.UserValidationResponse[2].Isok ?'':'is-invalid'}} " type="date"  [(ngModel)]="UserObjectInput.Birthdate"
+     id="validationServerBirthdate" aria-describedby="validationServerBirthdateFeedback" required>
+    <div id="validationServerBirthdateFeedback" class="invalid-feedback">
+      {{this.UserValidationResponse[2].Message}}
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="text-primary" for="validationServerPhone">מספר טלפון</label>
+    <input class="form-control mb-1 {{this.UserValidationResponse[3].Isok ?'':'is-invalid'}} " autocomplete="tel"  type="tel" [(ngModel)]="UserObjectInput.Phone"
+     placeholder="מספר טלפון" id="validationServerPhone" aria-describedby="validationServerPhoneFeedback" required>
+    <div id="validationServerPhoneFeedback" class="invalid-feedback">
+      {{this.UserValidationResponse[3].Message}}
+    </div>
+  </div>
+
+
+  <div class="mb-3">
+    <label class="text-primary" for="validationServerPassword">סיסמה</label>
+    <input class="form-control mb-3 {{this.UserValidationResponse[4].Isok?'':'is-invalid'}} " autocomplete="new-password" type="{{this.OpenEye?'text':'password'}}"
+    [(ngModel)]="UserObjectInput.Password"  placeholder="סיסמה" id="validationServerPassword" aria-describedby="validationServerPasswordFeedback" required>
+    <i class="{{this.OpenEye? 'bi bi-eye-fill':'bi bi-eye-slash-fill'}} " (click)="this.OpenEye=!this.OpenEye" ></i>
+    <div id="validationServerPasswordFeedback" class="invalid-feedback">
+      {{this.UserValidationResponse[4].Message}}
+    </div>
+  </div>
+
+  <div *ngIf="!SpinnerOn" class="mt-3">
+    <button  class="btn btn-primary" (click)="SpinnerOn=true ; ClickUpdate()">עדכן</button>
+  </div>
+
+    <div *ngIf="SpinnerOn" class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+
+    <div *ngIf="IsAfterClickUpdate">
+      <small class="{{UserValidationResponse[5].Isok?'text-success':'text-danger'}} ">{{UserValidationResponse[5].Message}}</small>
+    </div>
+
+
+  </div>
+</div>

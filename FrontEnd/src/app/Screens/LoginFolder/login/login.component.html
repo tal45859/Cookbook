@@ -1,0 +1,45 @@
+<div class="container">
+
+  <div class="border border-primary p-5 mt-5 mb-5">
+
+    <p class="text-primary h2">התחברות</p>
+    <hr class="mb-3 text-primary">
+      <div class="mb-3">
+          <input class="form-control mb-1 {{this.UserValidationResponse[0].Isok ?'':'is-invalid'}} "  autocomplete="email" type="email" [(ngModel)]="LoginObject.Email"
+           placeholder="מייל" id="validationServerEmail" aria-describedby="validationServerEmailFeedback" required>
+          <div id="validationServerEmailFeedback" class="invalid-feedback">
+            {{this.UserValidationResponse[0].Message}}
+          </div>
+      </div>
+
+  <div class="mb-3">
+    <input class="form-control mb-3 {{this.UserValidationResponse[1].Isok?'':'is-invalid'}} " autocomplete="current-password" type="{{this.OpenEye?'text':'password'}}"
+    [(ngModel)]="LoginObject.Password"  placeholder="סיסמה" id="validationServerPassword" aria-describedby="validationServerPasswordFeedback" required>
+    <i class="{{this.OpenEye? 'bi bi-eye-fill':'bi bi-eye-slash-fill'}} " (click)="ClickOpenEye()" ></i>
+    <div id="validationServerPasswordFeedback" class="invalid-feedback">
+      {{this.UserValidationResponse[1].Message}}
+    </div>
+</div>
+<div *ngIf="!this.UserValidationResponse[2].Isok" class="mb-3">
+  <small class="text-danger">{{this.UserValidationResponse[2].Message}}</small>
+</div>
+
+
+
+    <div *ngIf="!SpinnerOn">
+      <div><button  class="btn btn-primary" (click)="SpinnerOn=true ; ClickLogin()">התחבר</button></div>
+      <div><a class="text-primary" href="/ForgotPassword">שכחתי סיסמה</a></div>
+      <div><a class="text-primary" href="/SignUp">הרשמה</a></div>
+    </div>
+
+
+      <div *ngIf="SpinnerOn" class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+  </div>
+
+</div>
+<!-- is-valid | is-invalid -->
+<!-- valid-feedback| invalid-feedback -->
+

@@ -1,0 +1,4 @@
+<div class="container">
+  <app-update-recipe *ngIf="OpenNextStep==1" [RecipeObjectUpdate]="RecipeObjectToUpdate" (CloseMeOutpot)="NextStep($event)"></app-update-recipe>
+  <app-update-image *ngIf="OpenNextStep==2" [RecipIdLast]="RecipeObjectToUpdate.Id"></app-update-image>
+</div>

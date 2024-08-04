@@ -1,0 +1,17 @@
+<div class="container justify-content-center">
+
+  <div class="mt-3">
+    <button (click)="OpenChildren=1" class="btn btn-primary ms-1 mb-1 {{OpenChildren==1?'active':''}} ">כל המשתמשים</button>
+    <button (click)="OpenChildren=2" class="btn btn-primary ms-1  mb-1 {{OpenChildren==2?'active':''}}  ">משתמשים רגילים</button>
+    <button (click)="OpenChildren=3" class="btn btn-primary ms-1  mb-1 {{OpenChildren==3?'active':''}}  ">מנהלים</button>
+    <button (click)="OpenChildren=4" class="btn btn-primary ms-1  mb-1 {{OpenChildren==4?'active':''}} ">משתמשים חדשים</button>
+    <button (click)="OpenChildren=5" class="btn btn-primary ms-1  mb-1 {{OpenChildren==5?'active':''}}  ">היסטורית התחברויות</button>
+</div>
+
+<app-all-user-details *ngIf="OpenChildren==1" [TypeDetails]="OpenChildren"></app-all-user-details>
+<app-all-user-details *ngIf="OpenChildren==2" [TypeDetails]="OpenChildren"></app-all-user-details>
+<app-all-user-details *ngIf="OpenChildren==3" [TypeDetails]="OpenChildren"></app-all-user-details>
+<app-all-new-user *ngIf="OpenChildren==4" ></app-all-new-user>
+<app-all-login-history *ngIf="OpenChildren==5"></app-all-login-history>
+</div>
+

@@ -1,0 +1,46 @@
+<div class="container">
+
+  <p class="text-primary h2">היסטורית התחברויות</p>
+
+
+  <hr class="mb-3 text-primary">
+  <p class="text-primary h4 mb-3">סינון לפי זמן</p>
+<div class="justify-content-center">
+  <button (click)="TypeDate='Today'; GetLoginHistoryByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='Today'?'active':''}}  ">היום</button>
+  <button (click)="TypeDate='Month'; GetLoginHistoryByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='Month'?'active':''}} ">החודש</button>
+  <button (click)="TypeDate='Year'; GetLoginHistoryByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='Year'?'active':''}}  ">השנה</button>
+  <button (click)="TypeDate='AllTheTime'; GetLoginHistoryByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='AllTheTime'?'active':''}}  ">כל הזמן</button>
+</div>
+
+<p class="h5">סה"כ התחברויות בתקופת הזמן {{this.LoginHistoryArray.length}}</p>
+<div class="table-responsive mt-3">
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th>תאריך התחברות</th>
+        <th>מייל</th>
+        <th>שם פרטי</th>
+        <th>שם משפחה</th>
+        <th>תאריך הרשמה</th>
+        <th>תאריך לידה</th>
+        <th>טלפון</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of LoginHistoryArray | paginate: { itemsPerPage: 10, currentPage: page }">
+      <tr>
+        <td>{{item.DateAdded|date:'dd-MM-yyyy'}}</td>
+        <td>{{item.User?.Mail}}</td>
+        <td>{{item.User?.FirstName}}</td>
+        <td>{{item.User?.LastName}}</td>
+        <td>{{item.User?.RegisterDate|date:'dd-MM-yyyy'}}</td>
+        <td>{{item.User?.Birthdate |date:'dd-MM-yyyy'}}</td>
+        <td>{{item.User?.Phone}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+[nextLabel]="'הבא'"></pagination-controls>
+
+</div>
+

@@ -1,0 +1,22 @@
+<!-- <ul *ngIf="!this.ChangeHeader" class="nav justify-content-center navbar-light bg-light">
+  <li *ngFor="let header of HeaderNavBarData" class="nav-item">
+    <a class="nav-link active text-dark" href="{{header.url}}">{{header.name}}</a>
+  </li>
+</ul> -->
+
+<div >
+  <img  src="assets/header.jpg" alt="Snow" class="responsive" >
+<nav id="navs" class="navbar navbar-expand-lg  navbar-light top-right">
+  <div class="container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarNavAltMarkup">
+      <div class="navbar-nav" *ngFor="let header of HeaderNavBarData">
+        <a id="{{header.name}}"  class="nav-link active text-white"  href="{{header.url}}">{{header.name}}</a>
+
+      </div>
+    </div>
+  </div>
+</nav>
+</div>

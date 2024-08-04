@@ -1,0 +1,23 @@
+<!-- <app-header [HeaderNavBarData]="DefultNavBar"></app-header>
+<main class="d-flex justify-content-center">
+  <div class="bg">
+    <app-content ></app-content>
+  </div>
+
+</main>
+<app-footer></app-footer> -->
+
+<div>
+  <app-header *ngIf=" RoleForNav == null" [HeaderNavBarData]="DefultNavBar"></app-header>
+  <app-header *ngIf=" RoleForNav == 'Classic'" [HeaderNavBarData]="ClassicNavBar"></app-header>
+  <app-header *ngIf=" RoleForNav == 'Admin'" [HeaderNavBarData]="AdminNavBar"></app-header>
+</div>
+
+<main class="d-flex flex-column justify-content-between h-100 bg">
+  <div >
+    <app-content class="col-10"></app-content>
+  </div>
+</main>
+
+<app-footer></app-footer>
+

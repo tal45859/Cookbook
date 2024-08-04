@@ -1,0 +1,11 @@
+<div class="container">
+
+  <p class="text-primary h2">ניהול קטגוריה</p>
+  <hr class="mb-3 text-primary">
+  <div>
+    <button (click)="OpenChildren=1 " class="btn btn-primary ms-1 mb-1 {{OpenChildren==1?'active':''}} ">כל הקטגוריות</button>
+    <button (click)="OpenChildren=2" class="btn btn-primary ms-1 mb-1 {{OpenChildren==2?'active':''}} ">הוספת קטגוריה</button>
+  </div>
+  <app-all-category *ngIf="OpenChildren==1"></app-all-category>
+  <app-add-category *ngIf="OpenChildren==2"></app-add-category>
+</div>

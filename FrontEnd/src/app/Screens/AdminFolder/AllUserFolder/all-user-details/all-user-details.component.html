@@ -1,0 +1,78 @@
+<div class="container">
+  <p class="text-primary h2">{{this.HeaderTable}}</p>
+  <hr class="mb-3 text-primary">
+  <div class="table-responsive mt-3">
+    <table class="table table-dark table-striped table-hover">
+      <thead>
+        <tr>
+          <th>שם פרטי</th>
+          <th>שם משפחה</th>
+          <th>מייל</th>
+          <th>טלפון</th>
+          <th>תאריך הרשמה</th>
+          <th>תאריך לידה</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let item of AllUserByType | paginate: { itemsPerPage: 10, currentPage: page }">
+        <tr>
+          <td>{{item.FirstName}}</td>
+          <td>{{item.LastName}}</td>
+          <td>{{item.Mail}}</td>
+          <td>{{item.Phone}}</td>
+          <td>{{item.RegisterDate |date:'dd-MM-yyyy' }}</td>
+          <td>{{item.Birthdate |date:'dd-MM-yyyy'}}</td>
+          <!-- Button trigger modal -->
+          <td><button type="button" (click)="this.UserIdForDelete = item.Id ; this.IsDeleteOrUpdate=false" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">מחק </button></td>
+          <td><button type="button" (click)="this.UserObjectForUpdateRole.UserId=item.Id ; this.IsDeleteOrUpdate=true"  class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdropRole">{{this.TypeDetails==3? 'הפוך ללקוח': 'הפוך למנהל'}}</button></td>
+        </tr>
+        <tr id="{{item.Id}}" class="removeDisplay" >
+          <td colspan="8"><small class="text-danger">
+            <p>{{!this.IsDeleteOrUpdate? 'לא הצלחנו למחוק את המשתמש אנא נסה שנית מאוחר יותר!': 'לא הצלחנו לעדכן את תפקיד המשתמש אנא נסה שנית מאוחר יותר!'}}</p>
+          </small></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+  [nextLabel]="'הבא'"></pagination-controls>
+</div>
+
+<!-- Modal -->
+<div  class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="staticBackdropLabel">אישור מחיקה</h5>
+      </div>
+      <div class="modal-body">
+          <p>האם אתה בטוח שברצונך למחוק את המשתמש לצמיתות?</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="this.UserIdForDelete = 0" data-bs-dismiss="modal">ביטול</button>
+        <button type="button" class="btn btn-primary" (click)="ClickDelete()"  data-bs-dismiss="modal" >אישור</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div  class="modal fade" id="staticBackdropRole" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabelRole" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header justify-content-center">
+        <h5 class="modal-title" id="staticBackdropLabelRole">אישור החלפת תפקיד</h5>
+      </div>
+      <div class="modal-body">
+
+          <p>{{this.TypeDetails==3? 'האם אתה בטוח שברצונך להפוך מנהל זה ללקוח?': 'האם אתה בטוח שברצונך להפוך משתמש זה למנהל?'}}</p>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn btn-secondary" (click)="UserObjectForUpdateRole={}" data-bs-dismiss="modal">ביטול</button>
+        <button type="button" class="btn btn-primary"  (click)="ClickChangRole()"  data-bs-dismiss="modal" >אישור</button>
+      </div>
+    </div>
+  </div>
+</div>
+

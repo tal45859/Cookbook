@@ -1,0 +1,69 @@
+<div *ngIf="OpenSun==0" class="container">
+
+<div class="mt-5 mb-3">
+  <h2>המתכונים הנצפים ביותר</h2>
+  <p>3 המתכונים הנצפים ביותר שאתם צפיתם בהם השבוע</p>
+  <div class="row" >
+    <div class="col-md-4" *ngFor="let item of AllRecipeByBesViews| slice:0:3">
+      <div class="thumbnail">
+        <div>
+          <img class="btn" (click)="RecipeObjToSun=item;OpenSun=1" src="{{GetImageByRecipeId(item.Id)}}" alt="Lights" style="width:100% ; height:300px;">
+          <div class="caption">
+            <div class="row">
+              <p class="col ">{{item.RecipeName}}</p>
+              <p class="col ">{{item.NumberOfViews}} צפיות</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 mb-3">
+  <h2>המתכונים האהובים ביותר</h2>
+  <p>3 המתכונים האהובים ביותר שאתם אהבתם במיוחד השבוע</p>
+  <div class="row" >
+    <div class="col-md-4" *ngFor="let item of AllRecipeByBesLike| slice:0:3">
+      <div class="thumbnail">
+        <div>
+          <img class="btn" (click)="RecipeObjToSun=item;OpenSun=1" src="{{GetImageByRecipeId(item.Id)}}" alt="Lights" style="width:100% ; height:300px;">
+          <div class="caption">
+            <div class="row">
+              <p class="col ">{{item.RecipeName}}</p>
+              <p class="col ">{{item.NumberOfLikes}} ליקים</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mt-5 mb-3">
+  <h2>המתכונים החדשים ביותר</h2>
+  <p>3 המתכונים החדשים ביותר שאתם צריכים לראות</p>
+  <div class="row" >
+    <div class="col-md-4" *ngFor="let item of AllRecipeByUploadDate| slice:0:3">
+      <div class="thumbnail">
+        <div>
+          <img class="btn" (click)="RecipeObjToSun=item;OpenSun=1" src="{{GetImageByRecipeId(item.Id)}}" alt="Lights" style="width:100% ; height:300px;">
+          <div class="caption">
+            <div class="row">
+              <p class="col ">{{item.RecipeName}}</p>
+              <p class="col ">זמן הכנה: {{item.PreparationTime}} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<app-recipe-details *ngIf="OpenSun==1"[RecipeObj]="RecipeObjToSun" (CloseMeOutpot)="CloseMe()" ></app-recipe-details>
+
+
+
+

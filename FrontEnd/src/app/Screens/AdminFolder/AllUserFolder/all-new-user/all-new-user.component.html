@@ -1,0 +1,45 @@
+<div class="container">
+
+  <p class="text-primary h2">משתמשים חדשים</p>
+
+
+  <hr class="mb-3 text-primary">
+  <p class="text-primary h4 mb-3">סינון לפי זמן</p>
+<div class="justify-content-center">
+  <button (click)="TypeDate='Today'; GetNewUserByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='Today'?'active':''}}  ">היום</button>
+  <button (click)="TypeDate='Month'; GetNewUserByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='Month'?'active':''}} ">החודש</button>
+  <button (click)="TypeDate='Year'; GetNewUserByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='Year'?'active':''}}  ">השנה</button>
+  <button (click)="TypeDate='AllTheTime'; GetNewUserByDate()" class="btn btn-primary ms-1  mb-1 {{TypeDate=='AllTheTime'?'active':''}}  ">כל הזמן</button>
+</div>
+
+<p class="h5">סה"כ משתמשים חדשים לתקופת הזמן {{this.NewUserArray.length}}</p>
+<div class="table-responsive mt-3">
+  <table class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th>שם פרטי</th>
+        <th>שם משפחה</th>
+        <th>מייל</th>
+        <th>טלפון</th>
+        <th>תאריך הרשמה</th>
+        <th>תאריך לידה</th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let item of NewUserArray | paginate: { itemsPerPage: 10, currentPage: page }">
+      <tr>
+        <td>{{item.FirstName}}</td>
+        <td>{{item.LastName}}</td>
+        <td>{{item.Mail}}</td>
+        <td>{{item.Phone}}</td>
+        <td>{{item.RegisterDate |date:'dd-MM-yyyy' }}</td>
+        <td>{{item.Birthdate |date:'dd-MM-yyyy'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<pagination-controls class="text-center" (pageChange)="page = $event"  [previousLabel]="'הקודם'"
+[nextLabel]="'הבא'"></pagination-controls>
+
+
+</div>
+
